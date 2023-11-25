@@ -8,18 +8,6 @@
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
 
-double test_classifier(FunctionalANN& ann, const MatrixXd& X, const VectorXd& y) {
-	int m = X.rows();
-	double error_count = 0;
-	for (int i = 0; i < m; i++) {
-		double pred = ann.predict(X.row(i))(0) < 0.5 ? 0 : 1;
-		if (pred != y(i)) {
-			error_count++;
-		}
-	}
-	return error_count / m;
-}
-
 int main() {
 	auto [X_train, X_valid, y_train, y_valid] = load_gd_data();
 	int m = X_train.rows(), n = X_train.cols();
@@ -49,8 +37,8 @@ int main() {
 
 		if ((epoch + 1) % 10 == 0) {
 			std::cout << "[epoch " << epoch + 1 << "]";
-			std::cout << " sigmoid ann error rate: " << 100 * test_classifier(sigmoid_ann, X_valid, y_valid) << "%,";
-			std::cout << " relu ann error rate: " << 100 * test_classifier(relu_ann, X_valid, y_valid) << "%\n";
+			std::cout << " sigmoid ann error rate: " << 100 * test_binary_classifier(sigmoid_ann, X_valid, y_valid) << "%,";
+			std::cout << " relu ann error rate: " << 100 * test_binary_classifier(relu_ann, X_valid, y_valid) << "%\n";
 		}
 	}
 }
