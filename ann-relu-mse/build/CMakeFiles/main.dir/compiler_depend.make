@@ -849,7 +849,6 @@ CMakeFiles/main.dir/src/main.cpp.o: /Users/ethanewer/Desktop/matrix-methods-cpp/
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/stdarg.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/stddef.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/stdint.h \
-  /Users/ethanewer/Desktop/matrix-methods-cpp/ann-relu-mse/include/ANN.hpp \
   /Users/ethanewer/Desktop/matrix-methods-cpp/ann-relu-mse/include/ann.hpp \
   /Users/ethanewer/Desktop/matrix-methods-cpp/ann-relu-mse/include/util.hpp \
   /opt/homebrew/include/eigen3/Eigen/Cholesky \
@@ -1572,8 +1571,6 @@ CMakeFiles/main.dir/src/main.cpp.o: /Users/ethanewer/Desktop/matrix-methods-cpp/
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__utility/as_const.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/__type_traits/strip_signature.h:
-
-/Users/ethanewer/Desktop/matrix-methods-cpp/ann-relu-mse/include/ANN.hpp:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk/usr/include/c++/v1/ctype.h:
 
