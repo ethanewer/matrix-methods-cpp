@@ -9,13 +9,13 @@ using Eigen::MatrixXd;
 using Eigen::VectorXd;
 
 int main() {
-	auto [X_train, X_test, Y_train, Y_test] = load_mnist_fashion_data();
+	auto [X_train, X_test, Y_train, Y_test] = load_mnist_digits_data();
 	int m = X_train.rows(), n_x = X_train.cols(), n_y = Y_train.cols();
 
 	FunctionalANN model(
-		{n_x, 64, 64, 64, n_y},
-		{relu, relu, relu, softmax},
-		{relu_prime, relu_prime, relu_prime},
+		{n_x, 20, 20, 20, n_y},
+		{sigmoid, sigmoid, sigmoid, softmax},
+		{sigmoid_prime, sigmoid_prime, sigmoid_prime},
 		softmax_categorical_cross_entropy_prime
 	);
 	
