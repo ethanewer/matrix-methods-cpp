@@ -42,7 +42,9 @@ double test_multi_classifier(FunctionalANN& ann, const MatrixXd& X, const Matrix
 				max_y_val = Y(i, j);
 			}
 		}
+
 		if (max_pred_idx != max_y_idx) {
+			// std::cout << Y.row(i) << "	" << pred.transpose() << '\n';
 			error_count++;
 		}
 	}
@@ -183,6 +185,15 @@ std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_gd_data() {
 		csv2vector("../../data/gd-data/y_train.csv").array().max(0),
 		csv2vector("../../data/gd-data/y_valid.csv").array().max(0)
 	};
+}
+
+std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_digits_data() {
+	MatrixXd X_train = csv2matrix_with_ones("../../data/mnist-digits/X_train.csv");
+	MatrixXd X_test = csv2matrix_with_ones("../../data/mnist-digits/X_test.csv");
+	MatrixXd Y_train = csv2matrix("../../data/mnist-digits/Y_train.csv");
+	MatrixXd Y_test = csv2matrix("../../data/mnist-digits/Y_test.csv");
+	
+	return {X_train, X_test, Y_train, Y_test};
 }
 
 std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_fashion_data() {
