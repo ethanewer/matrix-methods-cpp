@@ -59,5 +59,4 @@ VectorXd softmax_categorical_cross_entropy_prime(const VectorXd& x, const Vector
 	return x - y;
 }
 
-
 #endif

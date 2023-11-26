@@ -13,7 +13,7 @@ int main() {
 	int m = X_train.rows(), n_x = X_train.cols(), n_y = Y_train.cols();
 
 	FunctionalANN model(
-		{n_x, 32, 32, 32, n_y},
+		{n_x, 64, 64, 64, n_y},
 		{relu, relu, relu, softmax},
 		{relu_prime, relu_prime, relu_prime},
 		softmax_categorical_cross_entropy_prime
@@ -22,7 +22,7 @@ int main() {
 	for (int epoch = 0; epoch < 200; epoch++) {
 		for (int i = 0; i < m; i++) {
 			model.forward(X_train.row(i));
-			model.back_prop_update(Y_train.row(i), 0.005);
+			model.back_prop_update(Y_train.row(i), 0.001);
 		}
 		if ((epoch + 1) % 10 == 0) {
 			std::cout << "[epoch " << epoch + 1 << "]";

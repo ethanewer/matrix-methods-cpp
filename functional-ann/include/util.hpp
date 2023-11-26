@@ -180,16 +180,16 @@ std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_credit_card_fraud_data()
 
 std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_gd_data() {
 	return {
-		csv2matrix_with_ones("../../data/gd-data/X_train.csv"),
-		csv2matrix_with_ones("../../data/gd-data/X_valid.csv"),
+		csv2matrix("../../data/gd-data/X_train.csv"),
+		csv2matrix("../../data/gd-data/X_valid.csv"),
 		csv2vector("../../data/gd-data/y_train.csv").array().max(0),
 		csv2vector("../../data/gd-data/y_valid.csv").array().max(0)
 	};
 }
 
 std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_digits_data() {
-	MatrixXd X_train = csv2matrix_with_ones("../../data/mnist-digits/X_train.csv");
-	MatrixXd X_test = csv2matrix_with_ones("../../data/mnist-digits/X_test.csv");
+	MatrixXd X_train = csv2matrix("../../data/mnist-digits/X_train.csv");
+	MatrixXd X_test = csv2matrix("../../data/mnist-digits/X_test.csv");
 	MatrixXd Y_train = csv2matrix("../../data/mnist-digits/Y_train.csv");
 	MatrixXd Y_test = csv2matrix("../../data/mnist-digits/Y_test.csv");
 	
@@ -197,12 +197,24 @@ std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_digits_data() {
 }
 
 std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_fashion_data() {
-	MatrixXd X_train = csv2matrix_with_ones("../../data/mnist-fashion/X_train.csv");
-	MatrixXd X_valid = csv2matrix_with_ones("../../data/mnist-fashion/X_test.csv");
+	MatrixXd X_train = csv2matrix("../../data/mnist-fashion/X_train.csv");
+	MatrixXd X_valid = csv2matrix("../../data/mnist-fashion/X_test.csv");
 	MatrixXd Y_train = csv2matrix("../../data/mnist-fashion/y_train.csv");
 	MatrixXd Y_valid = csv2matrix("../../data/mnist-fashion/y_test.csv");
 	
 	return {X_train, X_valid, Y_train, Y_valid};
+}
+
+double categorical_cross_entropy(FunctionalANN& ann, const MatrixXd& X, const MatrixXd& Y) {
+	int m = Y.rows(), n = Y.cols();
+	double res = 0;
+	for (int i = 0; i < m; i++) {
+		VectorXd pred = ann.predict(X.row(i));
+		for (int j = 0; j < n; j++) {
+			res -= Y(i, j) * log(pred(j));
+		}
+	}
+	return res;
 }
 
 #endif

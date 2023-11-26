@@ -30,6 +30,7 @@ struct FunctionalANN {
 		for (int i = 0; i < num_layers; i++) {
 			if (i > 0) {
 				W.push_back(MatrixXd::Random(layer_sizes[i], layer_sizes[i - 1]));
+				b.push_back(VectorXd::Random(layer_sizes[i]));
 			}
 			a.push_back(VectorXd::Zero(layer_sizes[i]));
 		}
@@ -38,31 +39,18 @@ struct FunctionalANN {
 	void forward(const VectorXd& input) {
 		a[0] = input;
 		for (int i = 0; i < num_layers - 1; i++) {
-			a[i + 1] = a_fns[i](W[i] * a[i]);
-			if (a[i + 1].hasNaN()) {
-				std::cout << (a[i]).transpose() << '\n';
-				std::cout << (W[i] * a[i]).transpose() << '\n';
-				std::cout << a[i + 1].transpose() << '\n';
-				throw std::runtime_error("[forward] NaN");
-			}
+			a[i + 1] = a_fns[i](W[i] * a[i] + b[i]);
 		}
 	}
 
 	void back_prop_update(const VectorXd& y, double learning_rate) {	
 		VectorXd z_prime = loss_fn_prime(a.back(), y);
-		if (z_prime.hasNaN()) {
-			std::cout << a.back().transpose() << '\n';
-			std::cout << loss_fn_prime(a.back(), y).transpose() << '\n';
-			throw std::runtime_error("[back_prop_update (z_prime before loop)] NaN");
-		}
 		for (int i = num_layers - 2; i >= 0; i--) {
+			b[i] -= learning_rate * z_prime;
 			MatrixXd W_prime = z_prime * a[i].transpose();
 			if (i > 0) {
 				z_prime = (W[i].transpose() * z_prime).array() * a_fn_primes[i - 1](a[i]).array();
 			}
-			if (z_prime.hasNaN()) throw std::runtime_error("[back_prop_update (z_prime)] NaN");
-			if (W_prime.hasNaN()) throw std::runtime_error("[back_prop_update (W_prime)] NaN");
-
 			W[i] -= learning_rate * W_prime;
 		}
 	}
@@ -78,6 +66,7 @@ struct FunctionalANN {
 	std::vector<ActivationFn> a_fn_primes;
 	LossFn loss_fn_prime;
 	std::vector<MatrixXd> W;
+	std::vector<VectorXd> b;
 	std::vector<VectorXd> a;
 };
 
