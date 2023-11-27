@@ -39,7 +39,7 @@ struct FunctionalANN {
 	void forward(const VectorXd& input) {
 		a[0] = input;
 		for (int i = 0; i < num_layers - 1; i++) {
-			a[i + 1] = a_fns[i]( W[i] * a[i] + b[i]);
+			a[i + 1] = a_fns[i](W[i] * a[i] + b[i]);
 		}
 	}
 
