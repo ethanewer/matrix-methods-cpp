@@ -205,11 +205,11 @@ std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_fashion_data() {
 	return {X_train, X_valid, Y_train, Y_valid};
 }
 
-std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_cock_data() {
+std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_chicken_data() {
 	MatrixXd X = csv2matrix("../../data/chickens/X.csv");
 	MatrixXd y = csv2matrix("../../data/chickens/y.csv");
 	
-	return split_data(X, y, 0.75, 0.25);
+	return split_data(X, y, 0.5, 0.5);
 }
 
 double categorical_cross_entropy(FunctionalANN& ann, const MatrixXd& X, const MatrixXd& Y) {
