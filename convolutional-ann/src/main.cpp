@@ -1,7 +1,7 @@
 #include <eigen3/Eigen/Dense>
 #include <iostream>
 #include <cmath>
-#include <functional_ann.hpp>
+#include <cnn.hpp>
 #include <ann_functions.hpp>
 #include <util.hpp>
 
@@ -12,10 +12,13 @@ int main() {
 	auto [X_train, X_test, Y_train, Y_test] = load_mnist_digits_data();
 	int m = X_train.rows(), n_x = X_train.cols(), n_y = Y_train.cols();
 
-	FunctionalANN model(
-		{n_x, 20, 20, 20, n_y},
-		{relu, relu, relu, softmax},
-		{relu_prime, relu_prime, relu_prime},
+	CNN model(
+		28,
+		{4, 4},
+		{3, 3},
+		{20, 20, n_y},
+		{relu, relu, softmax},
+		{relu_prime, relu_prime},
 		softmax_categorical_cross_entropy_prime
 	);
 	

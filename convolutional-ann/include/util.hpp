@@ -7,24 +7,12 @@
 #include <random>
 #include <utility>
 #include <eigen3/Eigen/Dense>
-#include <ann.hpp>
+#include <cnn.hpp>
 
 using Eigen::VectorXd;
 using Eigen::MatrixXd;
 
-double test_binary_classifier(ANN& ann, const MatrixXd& X, const VectorXd& y) {
-	int m = X.rows();
-	double error_count = 0;
-	for (int i = 0; i < m; i++) {
-		double pred = ann.predict(X.row(i))(0) < 0.5 ? 0 : 1;
-		if (pred != y(i)) {
-			error_count++;
-		}
-	}
-	return error_count / m;
-}
-
-double test_multi_classifier(ANN& ann, const MatrixXd& X, const MatrixXd& Y) {
+double test_multi_classifier(CNN& ann, const MatrixXd& X, const MatrixXd& Y) {
 	int m = X.rows(), n = Y.cols();
 	double error_count = 0;
 	for (int i = 0; i < m; i++) {
@@ -42,7 +30,9 @@ double test_multi_classifier(ANN& ann, const MatrixXd& X, const MatrixXd& Y) {
 				max_y_val = Y(i, j);
 			}
 		}
+
 		if (max_pred_idx != max_y_idx) {
+			// std::cout << Y.row(i) << "	" << pred.transpose() << '\n';
 			error_count++;
 		}
 	}
@@ -178,16 +168,25 @@ std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_credit_card_fraud_data()
 
 std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_gd_data() {
 	return {
-		csv2matrix_with_ones("../../data/gd-data/X_train.csv"),
-		csv2matrix_with_ones("../../data/gd-data/X_valid.csv"),
+		csv2matrix("../../data/gd-data/X_train.csv"),
+		csv2matrix("../../data/gd-data/X_valid.csv"),
 		csv2vector("../../data/gd-data/y_train.csv").array().max(0),
 		csv2vector("../../data/gd-data/y_valid.csv").array().max(0)
 	};
 }
 
+std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_digits_data() {
+	MatrixXd X_train = csv2matrix("../../data/mnist-digits/X_train.csv");
+	MatrixXd X_test = csv2matrix("../../data/mnist-digits/X_test.csv");
+	MatrixXd Y_train = csv2matrix("../../data/mnist-digits/Y_train.csv");
+	MatrixXd Y_test = csv2matrix("../../data/mnist-digits/Y_test.csv");
+	
+	return {X_train, X_test, Y_train, Y_test};
+}
+
 std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_fashion_data() {
-	MatrixXd X_train = csv2matrix_with_ones("../../data/mnist-fashion/X_train.csv");
-	MatrixXd X_valid = csv2matrix_with_ones("../../data/mnist-fashion/X_test.csv");
+	MatrixXd X_train = csv2matrix("../../data/mnist-fashion/X_train.csv");
+	MatrixXd X_valid = csv2matrix("../../data/mnist-fashion/X_test.csv");
 	MatrixXd Y_train = csv2matrix("../../data/mnist-fashion/y_train.csv");
 	MatrixXd Y_valid = csv2matrix("../../data/mnist-fashion/y_test.csv");
 	

@@ -78,6 +78,11 @@
 		"type_traits": "cpp",
 		"utility": "cpp",
 		"format": "cpp",
-		"stop_token": "cpp"
+		"stop_token": "cpp",
+		"tensor": "cpp",
+		"cinttypes": "cpp",
+		"forward_list": "cpp",
+		"typeindex": "cpp",
+		"unordered_set": "cpp"
 	}
 }

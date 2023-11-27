@@ -1,3 +1,0 @@
-/Users/ethanewer/Desktop/matrix-methods-cpp/ann-relu-mse/build/CMakeFiles/main.dir
-/Users/ethanewer/Desktop/matrix-methods-cpp/ann-relu-mse/build/CMakeFiles/edit_cache.dir
-/Users/ethanewer/Desktop/matrix-methods-cpp/ann-relu-mse/build/CMakeFiles/rebuild_cache.dir

@@ -31,7 +31,6 @@ struct FunctionalANN {
 			if (i > 0) {
 				W.push_back(MatrixXd::Random(layer_sizes[i], layer_sizes[i - 1]));
 				b.push_back(VectorXd::Random(layer_sizes[i]));
-				z.push_back(VectorXd::Zero(layer_sizes[i]));
 			}
 			a.push_back(VectorXd::Zero(layer_sizes[i]));
 		}
@@ -40,15 +39,14 @@ struct FunctionalANN {
 	void forward(const VectorXd& input) {
 		a[0] = input;
 		for (int i = 0; i < num_layers - 1; i++) {
-			z[i] = W[i] * a[i] + b[i];
-			a[i + 1] = a_fns[i](z[i]);
+			a[i + 1] = a_fns[i]( W[i] * a[i] + b[i]);
 		}
 	}
 
 	void back_prop_update(const VectorXd& y, double learning_rate) {	
 		VectorXd z_prime = loss_fn_prime(a.back(), y);
 		for (int i = num_layers - 2; i > 0; i--) {
-			VectorXd next_z_prime = (W[i].transpose() * z_prime).array() * a_fn_primes[i - 1](z[i - 1]).array();
+			VectorXd next_z_prime = (W[i].transpose() * z_prime).array() * a_fn_primes[i - 1](a[i]).array();
 			W[i] -= learning_rate * z_prime * a[i].transpose();
 			b[i] -= learning_rate * z_prime;
 			z_prime = std::move(next_z_prime);
@@ -69,7 +67,6 @@ struct FunctionalANN {
 	LossFn loss_fn_prime;
 	std::vector<MatrixXd> W;
 	std::vector<VectorXd> b;
-	std::vector<VectorXd> z;
 	std::vector<VectorXd> a;
 };
 
