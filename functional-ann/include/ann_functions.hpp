@@ -25,7 +25,11 @@ VectorXd sigmoid(const VectorXd& v) {
 }
 
 VectorXd sigmoid_prime(const VectorXd& a) {
-	return a.array() - (a.array() * a.array());
+	return a.array() * (1.0 - a.array());
+}
+
+VectorXd sigmoid_binary_cross_entropy_prime(const VectorXd& a, const VectorXd& y) {
+	return a.array() * (1.0 - y.array()) - y.array() * (1.0 - a.array());
 }
 
 VectorXd mse_prime(const VectorXd& a, const VectorXd& y) {

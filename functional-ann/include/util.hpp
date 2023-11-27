@@ -159,7 +159,7 @@ std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_credit_card_fraud_data()
 
 	int m = data.size(), n = data[0].size() - 2;
 	
-	MatrixXd X = MatrixXd::Ones(m, n + 1);
+	MatrixXd X = MatrixXd(m, n);
 	VectorXd y(m);
 
 	for (int i = 0; i < m; i++) {
