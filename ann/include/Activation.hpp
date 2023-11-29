@@ -13,6 +13,16 @@ private:
 	VectorXd activation;
 };
 
+class ClippedReLU : public Layer {
+public:
+	VectorXd forward(const VectorXd& input) override;
+	VectorXd backward(const VectorXd& output_grad, double lr) override;
+
+private:
+	VectorXd input;
+};
+
+
 class Sigmoid : public Layer {
 public:
 	VectorXd forward(const VectorXd& input) override;

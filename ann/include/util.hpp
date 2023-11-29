@@ -50,11 +50,12 @@ double test_multi_classifier(ANN& ann, const MatrixXd& X, const MatrixXd& Y) {
 	return error_count / m;
 }
 
-double test_binary_classifier(CNN& ann, const MatrixXd& X, const VectorXd& y) {
+double test_binary_classifier(CNN& ann, MatrixXd X, const VectorXd& y) {
 	int m = X.rows();
 	double error_count = 0;
 	for (int i = 0; i < m; i++) {
-		double pred = ann.predict({X.row(i).reshaped(28, 28)})(0) < 0.5 ? 0 : 1;
+		Tensor3d t = Eigen::TensorMap<Tensor3d>(X.row(i).data(), 1, 28, 28);
+		double pred = ann.predict(t)(0) < 0.5 ? 0 : 1;
 		if (pred != y(i)) {
 			error_count++;
 		}
@@ -62,12 +63,19 @@ double test_binary_classifier(CNN& ann, const MatrixXd& X, const VectorXd& y) {
 	return error_count / m;
 }
 
-double test_multi_classifier(CNN& ann, const MatrixXd& X, const MatrixXd& Y) {
+double test_multi_classifier(CNN& ann, MatrixXd X, const MatrixXd& Y) {
 	int m = X.rows(), n = Y.cols();
 	double error_count = 0;
 	for (int i = 0; i < m; i++) {
-		VectorXd pred = ann.predict({X.row(i).reshaped(28, 28)});
-		
+		VectorXd row = X.row(i);
+		Tensor3d t = Eigen::TensorMap<Tensor3d>(row.data(), 1, 28, 28);
+		VectorXd pred = ann.predict(t);
+		// std::cout << X.row(i) << '\n';
+		// std::cout << "\n\n" << t << "\n\n";
+		// std::cout << pred.transpose() << ' ' << Y.row(i) << '\n';
+		if (pred.hasNaN() || !pred.allFinite()) {
+			std::cout << "BAD PRED: " << pred.transpose() << "\n\n";
+		}
 		int max_pred_idx = 0, max_y_idx = 0;
 		double max_pred_val = pred(0), max_y_val = Y(i, 0);
 		for (int j = 0; j < n; j++) {

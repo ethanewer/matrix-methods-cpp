@@ -8,6 +8,20 @@ VectorXd ReLU::backward(const VectorXd& output_grad, double lr) {
 	return output_grad.array() * activation.array().sign();
 }
 
+VectorXd ClippedReLU::forward(const VectorXd& input) {
+	this->input = input;
+	return input.array().max(0).min(4);
+}
+
+VectorXd ClippedReLU::backward(const VectorXd& output_grad, double lr) {
+	int n = input.size();
+	VectorXd grad = output_grad;
+	for (int i = 0; i < n; i++) {
+		if (input(i) < 0 || 4 < input(i)) grad(i) = 0;
+	}
+	return grad;
+}
+
 VectorXd Sigmoid::forward(const VectorXd& input) {
 	return this->activation = 1.0 / ((-input.array()).exp() + 1.0);
 }
@@ -26,6 +40,7 @@ VectorXd SigmoidBinaryCrossentropy::backward(const VectorXd& y_true, double lr) 
 
 VectorXd SoftmaxCategoricalCrossentropy::forward(const VectorXd& input) {
 	VectorXd exp_input = input.array().exp();
+	//std::cout << "\nexp_sum: " << exp_input.sum() << "\n\n";
 	return this->activation = exp_input / exp_input.sum();
 }
 
