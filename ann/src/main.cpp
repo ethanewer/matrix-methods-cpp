@@ -35,7 +35,7 @@ int main() {
 	);
 
 	double min_error_rate = 1;
-	for (int epoch = 0; epoch < 500; epoch++) {
+	for (int epoch = 0; epoch < 1000; epoch++) {
 		for (int i = 0; i < m; i++) {
 			model.predict(X_train.row(i));
 			model.update(Y_train.row(i), 1e-4);
