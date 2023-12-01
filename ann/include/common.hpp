@@ -7,8 +7,12 @@
 #include <array>
 #include <vector>
 #include <algorithm>
-#include <string>
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <random>
+#include <utility>
 
 using Eigen::MatrixXd;
 using Eigen::VectorXd;

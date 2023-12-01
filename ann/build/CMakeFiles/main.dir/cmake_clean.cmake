@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/src/Conv2D.cpp.o.d"
   "CMakeFiles/main.dir/src/Dense.cpp.o"
   "CMakeFiles/main.dir/src/Dense.cpp.o.d"
+  "CMakeFiles/main.dir/src/data.cpp.o"
+  "CMakeFiles/main.dir/src/data.cpp.o.d"
   "CMakeFiles/main.dir/src/main.cpp.o"
   "CMakeFiles/main.dir/src/main.cpp.o.d"
   "main"

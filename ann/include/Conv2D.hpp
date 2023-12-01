@@ -6,9 +6,9 @@
 
 class Conv2D {
 public:
-	Conv2D(std::array<int, 3> input_shape, int kernel_size, int depth);
-	Tensor3d forward(const Tensor3d& input);
-	Tensor3d backward(const Tensor3d& output_grad, double lr);
+	Conv2D(const std::array<int, 3>& input_shape, int kernel_size, int depth);
+	virtual Tensor3d forward(const Tensor3d& input);
+	virtual Tensor3d backward(const Tensor3d& output_grad, double lr);
 
 	int depth;
 	std::array<int, 3> input_shape;
@@ -18,6 +18,15 @@ public:
 	Tensor3d biases;
 	Tensor3d input;
 	Tensor3d output;
+};
+
+class Conv2DL2 : public Conv2D {
+public:
+	Conv2DL2(const std::array<int, 3>& input_shape, int kernel_size, int depth, double lam);
+	Tensor3d forward(const Tensor3d& input) override;
+	Tensor3d backward(const Tensor3d& output_grad, double lr) override;
+
+	double lam;
 };
 
 #endif

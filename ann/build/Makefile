@@ -249,6 +249,30 @@ src/Dense.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Dense.cpp.s
 .PHONY : src/Dense.cpp.s
 
+src/data.o: src/data.cpp.o
+.PHONY : src/data.o
+
+# target to build an object file
+src/data.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/data.cpp.o
+.PHONY : src/data.cpp.o
+
+src/data.i: src/data.cpp.i
+.PHONY : src/data.i
+
+# target to preprocess a source file
+src/data.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/data.cpp.i
+.PHONY : src/data.cpp.i
+
+src/data.s: src/data.cpp.s
+.PHONY : src/data.s
+
+# target to generate assembly for a file
+src/data.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/data.cpp.s
+.PHONY : src/data.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -297,6 +321,9 @@ help:
 	@echo "... src/Dense.o"
 	@echo "... src/Dense.i"
 	@echo "... src/Dense.s"
+	@echo "... src/data.o"
+	@echo "... src/data.i"
+	@echo "... src/data.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

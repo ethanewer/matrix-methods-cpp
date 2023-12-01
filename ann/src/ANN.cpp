@@ -1,4 +1,5 @@
 #include <ANN.hpp>
+#include <Dense.hpp>
 
 ANN::ANN(const std::vector<Layer*>& layers, LossLayer* loss_layer) : layers(layers), loss_layer(loss_layer) {}
 
@@ -16,6 +17,19 @@ void ANN::update(const VectorXd& y_true, double lr) {
 		grad = layers[i]->backward(grad, lr);
 	}
 }
+
+void ANN::save(const std::string& prefix) {
+	for (int i = 0; i < layers.size(); i++) {
+		if (Dense* dense = dynamic_cast<Dense*>(layers[i])) {
+			std::string file_prefix = prefix + "_layer_" + std::to_string(i);
+			dense->save(file_prefix  + "_weights.csv", file_prefix + "_bias.csv");
+		} else if (DenseL2* dense_l2 = dynamic_cast<DenseL2*>(layers[i])) {
+			std::string file_prefix = prefix + "_layer_" + std::to_string(i);
+			dense_l2->save(file_prefix  + "_weights.csv", file_prefix + "_bias.csv");
+		}
+	}
+}
+
 
 ANN::~ANN() {
 	for (Layer* layer : layers) {
