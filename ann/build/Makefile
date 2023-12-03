@@ -48,10 +48,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake
+CMAKE_COMMAND = /opt/homebrew/Cellar/cmake/3.27.9/bin/cmake
 
 # The command to remove a file.
-RM = /opt/homebrew/Cellar/cmake/3.27.7/bin/cmake -E rm -f
+RM = /opt/homebrew/Cellar/cmake/3.27.9/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -68,7 +68,7 @@ CMAKE_BINARY_DIR = /Users/ethanewer/Desktop/matrix-methods-cpp/ann/build
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake cache editor..."
-	/opt/homebrew/Cellar/cmake/3.27.7/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/opt/homebrew/Cellar/cmake/3.27.9/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -78,7 +78,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
-	/opt/homebrew/Cellar/cmake/3.27.7/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/opt/homebrew/Cellar/cmake/3.27.9/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -225,6 +225,30 @@ src/Conv2D.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/Conv2D.cpp.s
 .PHONY : src/Conv2D.cpp.s
 
+src/DataLoader.o: src/DataLoader.cpp.o
+.PHONY : src/DataLoader.o
+
+# target to build an object file
+src/DataLoader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/DataLoader.cpp.o
+.PHONY : src/DataLoader.cpp.o
+
+src/DataLoader.i: src/DataLoader.cpp.i
+.PHONY : src/DataLoader.i
+
+# target to preprocess a source file
+src/DataLoader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/DataLoader.cpp.i
+.PHONY : src/DataLoader.cpp.i
+
+src/DataLoader.s: src/DataLoader.cpp.s
+.PHONY : src/DataLoader.s
+
+# target to generate assembly for a file
+src/DataLoader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/DataLoader.cpp.s
+.PHONY : src/DataLoader.cpp.s
+
 src/Dense.o: src/Dense.cpp.o
 .PHONY : src/Dense.o
 
@@ -318,6 +342,9 @@ help:
 	@echo "... src/Conv2D.o"
 	@echo "... src/Conv2D.i"
 	@echo "... src/Conv2D.s"
+	@echo "... src/DataLoader.o"
+	@echo "... src/DataLoader.i"
+	@echo "... src/DataLoader.s"
 	@echo "... src/Dense.o"
 	@echo "... src/Dense.i"
 	@echo "... src/Dense.s"

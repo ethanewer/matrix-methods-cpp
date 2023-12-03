@@ -69,6 +69,51 @@ MatrixXd csv2matrix_with_ones(const std::string& path) {
 	return X;
 }
 
+VectorXd csv2vector(const std::string& path, int max_size) {
+	std::ifstream file(path);
+	std::string line;
+	int m = 0;
+	while (m < max_size && std::getline(file, line)) {
+		m++;
+	}
+	file.close();
+	file.open(path);
+	VectorXd x(m);
+	for (int i = 0; i < m; i++) {
+		std::getline(file, line);
+		x(i) = stod(line);
+	}
+	file.close();
+	return x;
+}
+
+MatrixXd csv2matrix(const std::string& path, int max_size) {
+	std::ifstream file(path);
+	std::string line;
+	int m = 0, n = 0;
+	while (m < max_size && std::getline(file, line)) {
+		m++;
+		if (n == 0) {
+			std::istringstream ss(line);
+			std::string cell;
+			while (std::getline(ss, cell, ',')) n++;
+		}
+	}
+	file.close();
+	file.open(path);
+	MatrixXd X(m, n);
+	for (int i = 0; i < m; i++) {
+		std::getline(file, line);
+		std::istringstream ss(line);
+		std::string cell;
+		for (int j = 0; std::getline(ss, cell, ','); j++) {
+			X(i, j) = std::stod(cell);
+		}
+	}
+	file.close();
+	return X;
+}
+
 MatrixXd normalize(const MatrixXd& X) {
 	int m = X.rows(), n = X.cols();
 	MatrixXd X_normalized(m, n);
@@ -154,6 +199,20 @@ std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_fashion_data() {
 std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_chicken_data() {
 	MatrixXd X = csv2matrix("../../data/chickens/X.csv");
 	MatrixXd y = csv2matrix("../../data/chickens/y.csv");
+	
+	return split_data(X, y, 0.5, 0.5);
+}
+
+std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_cats_vs_dogs_data() {
+	MatrixXd X = csv2matrix("../../data/cats-vs-dogs/X.csv");
+	MatrixXd y = csv2matrix("../../data/cats-vs-dogs/y.csv");
+	
+	return split_data(X, y, 0.5, 0.5);
+}
+
+std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_cats_vs_dogs_data(int max_rows) {
+	MatrixXd X = csv2matrix("../../data/cats-vs-dogs/X.csv", max_rows);
+	MatrixXd y = csv2matrix("../../data/cats-vs-dogs/y.csv", max_rows);
 	
 	return split_data(X, y, 0.5, 0.5);
 }

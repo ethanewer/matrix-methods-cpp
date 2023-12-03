@@ -1,12 +1,12 @@
 #include <Conv2D.hpp>
 
-static Tensor3d scale_down(const Tensor3d& t) {
-	double abs_sum = std::reduce(t.data(), t.data() + t.size(), 0.0, [](double a, double b) {
-		return a + std::abs(b);
-	});
-	double scale_factor = abs_sum > t.size() ? static_cast<double>(t.size()) / abs_sum : 1.0;
-	return scale_factor * t;
-}
+// static Tensor3d scale_down(const Tensor3d& t) {
+// 	double abs_sum = std::reduce(t.data(), t.data() + t.size(), 0.0, [](double a, double b) {
+// 		return a + std::abs(b);
+// 	});
+// 	double scale_factor = abs_sum > t.size() ? static_cast<double>(t.size()) / abs_sum : 1.0;
+// 	return scale_factor * t;
+// }
 
 static Tensor2d valid_correlation(const Tensor2d& X, const Tensor2d& K) {
 	Tensor2d res = X.convolve(K, Eigen::array<ptrdiff_t, 2> {0, 1});
@@ -26,11 +26,12 @@ static Tensor2d full_colvolution(const Tensor2d& X, const Tensor2d& K) {
 	return valid_correlation(X_padded, K_rotated);
 }
 
-Conv2D::Conv2D(const std::array<int, 3>& input_shape, int kernel_size, int depth) : input_shape(input_shape), depth(depth) {
+Conv2D::Conv2D(const std::array<int, 3>& input_shape, int kernel_size, int depth) : depth(depth) {
+	this->input_shape = input_shape;
 	auto [input_depth, input_height, input_width] = input_shape;
 	output_shape = {depth, input_height - kernel_size + 1, input_width - kernel_size + 1};
 	kernels_shape = {depth, input_depth, kernel_size, kernel_size};
-	kernels = Tensor4d(kernels_shape[0], kernels_shape[1], kernels_shape[2], kernels_shape[3]).setRandom();
+	kernels = (1.0 / (kernel_size * kernel_size)) * Tensor4d(kernels_shape[0], kernels_shape[1], kernels_shape[2], kernels_shape[3]).setRandom();
 	biases = Tensor3d(output_shape[0], output_shape[1], output_shape[2]).setRandom();
 }
 
@@ -42,7 +43,7 @@ Tensor3d Conv2D::forward(const Tensor3d& input) {
 			output.chip(i, 0) += valid_correlation(input.chip(j, 0), kernels.chip(i, 0).chip(j, 0));
 		}
 	}
-	return scale_down(output);
+	return output;
 }
 
 Tensor3d Conv2D::backward(const Tensor3d& output_grad, double lr) {
@@ -55,10 +56,17 @@ Tensor3d Conv2D::backward(const Tensor3d& output_grad, double lr) {
 		}
 		biases.chip(i, 0) -= lr * output_grad.chip(i, 0);
 	}
-	return scale_down(input_grad);
+	return input;
 }
 
-Conv2DL2::Conv2DL2(const std::array<int, 3>& input_shape, int kernel_size, int depth, double lam) : Conv2D(input_shape, kernel_size, depth), lam(lam) {}
+Conv2DL2::Conv2DL2(const std::array<int, 3>& input_shape, int kernel_size, int depth, double lam) :  depth(depth), lam(lam) {
+	this->input_shape = input_shape;
+	auto [input_depth, input_height, input_width] = input_shape;
+	output_shape = {depth, input_height - kernel_size + 1, input_width - kernel_size + 1};
+	kernels_shape = {depth, input_depth, kernel_size, kernel_size};
+	kernels = (1.0 / (kernel_size * kernel_size)) * Tensor4d(kernels_shape[0], kernels_shape[1], kernels_shape[2], kernels_shape[3]).setRandom();
+	biases = Tensor3d(output_shape[0], output_shape[1], output_shape[2]).setRandom();
+}
 
 Tensor3d Conv2DL2::forward(const Tensor3d& input) {
 	this->input = input;

@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/src/CNN.cpp.o.d"
   "CMakeFiles/main.dir/src/Conv2D.cpp.o"
   "CMakeFiles/main.dir/src/Conv2D.cpp.o.d"
+  "CMakeFiles/main.dir/src/DataLoader.cpp.o"
+  "CMakeFiles/main.dir/src/DataLoader.cpp.o.d"
   "CMakeFiles/main.dir/src/Dense.cpp.o"
   "CMakeFiles/main.dir/src/Dense.cpp.o.d"
   "CMakeFiles/main.dir/src/data.cpp.o"

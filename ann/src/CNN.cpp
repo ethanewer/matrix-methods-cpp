@@ -1,14 +1,14 @@
 #include <CNN.hpp>
 
 CNN::CNN(
-	const std::vector<Conv2D*>& conv_layers,
+	const std::vector<ConvLayer*>& conv_layers,
 	const std::vector<Layer*>& dense_layers,
 	LossLayer* loss_layer
 ) : conv_layers(conv_layers), dense_layers(dense_layers), loss_layer(loss_layer) {}
 
 VectorXd CNN::predict(const Tensor3d& input) {
 	Tensor3d output_tensor = input;
-	for (Conv2D* layer : conv_layers) {
+	for (ConvLayer* layer : conv_layers) {
 		output_tensor = layer->forward(output_tensor);
 	}
 
@@ -35,7 +35,7 @@ void CNN::update(const VectorXd& y_true, double lr) {
 }
 
 CNN::~CNN() {
-	for (Conv2D* layer : conv_layers) {
+	for (ConvLayer* layer : conv_layers) {
 		delete layer;
 	}
 	for (Layer* layer : dense_layers) {

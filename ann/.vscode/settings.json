@@ -74,6 +74,13 @@
 		"format": "cpp",
 		"iostream": "cpp",
 		"matrixfunctions": "cpp",
-		"fft": "cpp"
+		"fft": "cpp",
+		"__errc": "cpp",
+		"__locale": "cpp",
+		"charconv": "cpp",
+		"clocale": "cpp",
+		"cstdarg": "cpp",
+		"queue": "cpp",
+		"system_error": "cpp"
 	}
 }

@@ -4,15 +4,13 @@
 #include <common.hpp>
 #include <Layer.hpp>
 
-class Conv2D {
+class Conv2D : public ConvLayer {
 public:
 	Conv2D(const std::array<int, 3>& input_shape, int kernel_size, int depth);
-	virtual Tensor3d forward(const Tensor3d& input);
-	virtual Tensor3d backward(const Tensor3d& output_grad, double lr);
+	Tensor3d forward(const Tensor3d& input) override;
+	Tensor3d backward(const Tensor3d& output_grad, double lr) override;
 
 	int depth;
-	std::array<int, 3> input_shape;
-	std::array<int, 3> output_shape;
 	std::array<int, 4> kernels_shape;
 	Tensor4d kernels;
 	Tensor3d biases;
@@ -20,12 +18,18 @@ public:
 	Tensor3d output;
 };
 
-class Conv2DL2 : public Conv2D {
+class Conv2DL2 : public ConvLayer {
 public:
 	Conv2DL2(const std::array<int, 3>& input_shape, int kernel_size, int depth, double lam);
 	Tensor3d forward(const Tensor3d& input) override;
 	Tensor3d backward(const Tensor3d& output_grad, double lr) override;
 
+	int depth;
+	std::array<int, 4> kernels_shape;
+	Tensor4d kernels;
+	Tensor3d biases;
+	Tensor3d input;
+	Tensor3d output;
 	double lam;
 };
 
