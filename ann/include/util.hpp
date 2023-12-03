@@ -140,6 +140,32 @@ double test_multi_classifier(ANN& model, MatrixDataLoader& data) {
 	return error_count / batch_size;
 }
 
+double test_multi_classifier(CNN& model, TensorDataLoader& data) {
+	double error_count = 0;
+	auto [X, Y] = data.get_batch();
+	int batch_size = Y.rows();
+	for (int i = 0; i < batch_size; i++) {
+		VectorXd pred = model.predict(X.chip(i, 0));
+		
+		int max_pred_idx = 0, max_y_idx = 0;
+		double max_pred_val = pred(0), max_y_val = Y(i, 0);
+		for (int j = 0; j < pred.size(); j++) {
+			if (pred(j) > max_pred_val) {
+				max_pred_idx = j;
+				max_pred_val = pred(j);
+			}
+			if (Y(i, j) > max_y_val) {
+				max_y_idx = j;
+				max_y_val = Y(i, j);
+			}
+		}
+
+		if (max_pred_idx != max_y_idx) {
+			error_count++;
+		}
+	}
+	return error_count / batch_size;
+}
 
 template<typename Fn, typename... Args>
 auto time_fn(Fn&& fn, Args&&... args) {

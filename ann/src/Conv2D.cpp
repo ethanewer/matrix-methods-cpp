@@ -87,3 +87,85 @@ Tensor3d Conv2DL2::backward(const Tensor3d& output_grad, double lr) {
 	}
 	return input_grad;
 }
+
+MaxPooling::MaxPooling(const std::array<int, 3>& input_shape, int pool_size) : pool_size(pool_size) {
+	this->input_shape = input_shape;
+	output_shape = {input_shape[0], input_shape[1] / pool_size, input_shape[2] / pool_size};
+}
+
+Tensor3d MaxPooling::forward(const Tensor3d& input) {
+	input_grad = Tensor3d(input_shape[0], input_shape[1], input_shape[2]).setZero();
+	Tensor3d output(output_shape[0], output_shape[1], output_shape[2]);
+
+	#pragma omp parallel for
+	for (int i = 0; i < output_shape[0]; i++) {
+		for (int j = 0; j < output_shape[1]; j++) {
+			for (int k = 0; k < output_shape[2]; k++) {
+				int max_x = pool_size * k, max_y = pool_size * k;
+				for (int x = pool_size * j; x < pool_size * (j + 1); x++) {
+					for (int y = pool_size * k; y < pool_size * (k + 1); y++) {
+						if (input(i, x, y) > input(i, max_x, max_y)) {
+							max_x = x;
+							max_y = y;
+						}
+					}
+				}
+				output(i, j, k) = input(i, max_x, max_y);
+				input_grad(i, max_x, max_y) = 1;
+			}
+		}
+	}
+
+	return output;
+}
+
+Tensor3d MaxPooling::backward(const Tensor3d& output_grad, double lr) {
+	#pragma omp parallel for
+	for (int i = 0; i < output_shape[0]; i++) {
+		for (int j = 0; j < output_shape[1]; j++) {
+			for (int k = 0; k < output_shape[2]; k++) {
+				for (int x = pool_size * j; x < pool_size * (j + 1); x++) {
+					for (int y = pool_size * k; y < pool_size * (k + 1); y++) {
+						input_grad(i, x, y) *= output_grad(i, j, k);
+					}
+				}
+			}
+		}
+	}
+	return input_grad;
+}
+
+ConvReLU::ConvReLU(const std::array<int, 3>& input_shape) {
+	this->input_shape = input_shape;
+	this->output_shape = input_shape;
+}
+
+Tensor3d ConvReLU::forward(const Tensor3d& input) {
+	activation = input.cwiseMax(0.0);
+	return activation;
+}
+
+Tensor3d ConvReLU::backward(const Tensor3d& output_grad, double lr) {
+	return output_grad * activation.sign();
+}
+
+StandardScaler::StandardScaler(const std::array<int, 3>& input_shape) {
+	this->input_shape = input_shape;
+	this->output_shape = input_shape;
+}
+
+Tensor3d StandardScaler::forward(const Tensor3d& input) {
+	// Tensor3d t = input;
+	// VectorXd v = Eigen::Map<VectorXd>(t.data(), t.size());
+	// std::cout << v.hasNaN() << '\n';
+
+	double mean = std::reduce(input.data(), input.data() + input.size()) / input.size();
+	Tensor3d tmp = (input - mean).square();
+	scale_factor = 1.0 / sqrt(std::reduce(tmp.data(), tmp.data() + tmp.size()));
+
+	return scale_factor * (input - mean);
+}
+
+Tensor3d StandardScaler::backward(const Tensor3d& output_grad, double lr) {
+	return scale_factor * output_grad;
+}

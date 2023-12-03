@@ -26,7 +26,6 @@ std::tuple<MatrixXd, MatrixXd> MatrixDataLoader::get_batch() {
 			label_file.close();
 			data_file.open(data_path);
 			label_file.open(label_path);
-			continue;
 		}
 
 		std::istringstream data_ss(data_row);
@@ -71,7 +70,6 @@ std::tuple<Tensor4d, MatrixXd> TensorDataLoader::get_batch() {
 			label_file.close();
 			data_file.open(data_path);
 			label_file.open(label_path);
-			continue;
 		}
 
 		std::istringstream data_ss(data_row);

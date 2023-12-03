@@ -17,6 +17,7 @@ VectorXd CNN::predict(const Tensor3d& input) {
 	for (Layer* layer : dense_layers) {
 		output_vector = layer->forward(output_vector);
 	}
+
 	return loss_layer->forward(output_vector);
 }
 

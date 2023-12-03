@@ -149,7 +149,7 @@ std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_credit_card_fraud_data()
 	if (data.empty()) throw std::runtime_error("empty CSV file");
 
 	std::random_device rd;
-  std::mt19937 gen(rd());
+  	std::mt19937 gen(rd());
 	std::shuffle(data.begin(), data.end(), gen);
 
 	int m = data.size(), n = data[0].size() - 2;

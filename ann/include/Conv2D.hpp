@@ -33,4 +33,32 @@ public:
 	double lam;
 };
 
+class MaxPooling : public ConvLayer {
+public:
+	MaxPooling(const std::array<int, 3>& input_shape, int pool_size);
+	Tensor3d forward(const Tensor3d& input) override;
+	Tensor3d backward(const Tensor3d& output_grad, double lr) override;
+
+	int pool_size;
+	Tensor3d input_grad;
+};
+
+class ConvReLU : public ConvLayer {
+public:
+	ConvReLU(const std::array<int, 3>& input_shape);
+	Tensor3d forward(const Tensor3d& input) override;
+	Tensor3d backward(const Tensor3d& output_grad, double lr) override;
+
+	Tensor3d activation;
+};
+
+class StandardScaler : public ConvLayer {
+public:
+	StandardScaler(const std::array<int, 3>& input_shape);
+	Tensor3d forward(const Tensor3d& input) override;
+	Tensor3d backward(const Tensor3d& output_grad, double lr) override;
+
+	double scale_factor;
+};
+
 #endif
