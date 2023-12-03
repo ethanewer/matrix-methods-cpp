@@ -3,6 +3,7 @@
 
 #include <eigen3/Eigen/Dense>
 #include <eigen3/unsupported/Eigen/CXX11/Tensor>
+#include <omp.h>
 #include <cmath>
 #include <array>
 #include <vector>

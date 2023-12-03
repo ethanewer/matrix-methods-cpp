@@ -9,45 +9,54 @@
 #include <util.hpp>
 
 int main() {
-	int batch_size = 5000;
-	double lr = 1e-3;
+	int train_batch_size = 1000;
+	double lr = 0.0001;
 
-	MatrixDataLoader train_data(
-		"../../data/mnist-fashion/X_train.csv", 
-		"../../data/mnist-fashion/y_train.csv",
-		784, 10, batch_size
+	TensorDataLoader train_data(
+		"../../data/cats-vs-dogs/X_train.csv", 
+		"../../data/cats-vs-dogs/y_train.csv",
+		{1, 100, 100}, 1, train_batch_size
 	);
 
-	MatrixDataLoader test_data(
-		"../../data/mnist-fashion/X_test.csv", 
-		"../../data/mnist-fashion/y_test.csv",
-		784, 10, batch_size
+	TensorDataLoader test_data(
+		"../../data/cats-vs-dogs/X_test.csv", 
+		"../../data/cats-vs-dogs/y_test.csv",
+		{1, 100, 100}, 1, 5000
 	);
 
-	std::string model_path = "../models/fashion/784-96-32-10/model_";
-
-	ANN model(
+	CNN model(
 		{
-			new DenseL2(model_path + "layer_0_weights.csv", model_path + "layer_0_bias.csv", 1e-3),
+			new Conv2D({1, 100, 100}, 3, 8),
+		}, {
+			new Dense(8 * 98 * 98, 128),
 			new ReLU(),
-			new DenseL2(model_path + "layer_2_weights.csv", model_path + "layer_2_bias.csv", 1e-3),
-			new ReLU(),
-			new DenseL2(model_path + "layer_4_weights.csv", model_path + "layer_4_bias.csv", 1e-3),
+			new Dense(128, 1),
 		},
-		new SoftmaxCategoricalCrossentropy()
+		new SigmoidBinaryCrossentropy()
 	);
 
 	for (int batch_num = 0; batch_num < 1000; batch_num++) {
 		auto [X, Y] = train_data.get_batch();
-		for (int epoch = 0; epoch < 10; epoch++) {
-			for (int i = 0; i < batch_size; i++) {
-				model.predict(X.row(i));
+
+		for (int epoch = 0; epoch < 5; epoch++) {
+			std::cout << "    [epoch " << epoch + 1 << "]\n";
+
+			auto start = std::chrono::high_resolution_clock::now();
+
+			for (int i = 0; i < train_batch_size; i++) {
+				model.predict(X.chip(i, 0));
 				model.update(Y.row(i), lr);
 			}
+
+			auto end = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double> duration = end - start;
+			double seconds = duration.count();
+			std::cout << "time: " << seconds << " seconds\n";
 		}
-		if (batch_num < 10 || (batch_num + 1) % 10 == 0) {
-			std::cout << "[batch " << batch_num + 1 << "] ";
-			std::cout << "error rate: " << 100.0 * test_multi_classifier(model, test_data) << "%\n";
-		}
+
+		std::cout << "[batch " << batch_num + 1 << "] ";
+		std::cout << "error rate: " << 100.0 * test_binary_classifier(model, test_data) << "%\n";
 	}
 }
+
+// before: 30 seconds per epoch

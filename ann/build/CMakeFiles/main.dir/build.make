@@ -73,113 +73,113 @@ CMakeFiles/main.dir/src/ANN.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/ANN.cpp.o: /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/ANN.cpp
 CMakeFiles/main.dir/src/ANN.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ethanewer/Desktop/matrix-methods-cpp/ann/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/src/ANN.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/ANN.cpp.o -MF CMakeFiles/main.dir/src/ANN.cpp.o.d -o CMakeFiles/main.dir/src/ANN.cpp.o -c /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/ANN.cpp
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/ANN.cpp.o -MF CMakeFiles/main.dir/src/ANN.cpp.o.d -o CMakeFiles/main.dir/src/ANN.cpp.o -c /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/ANN.cpp
 
 CMakeFiles/main.dir/src/ANN.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/src/ANN.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/ANN.cpp > CMakeFiles/main.dir/src/ANN.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/ANN.cpp > CMakeFiles/main.dir/src/ANN.cpp.i
 
 CMakeFiles/main.dir/src/ANN.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/ANN.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/ANN.cpp -o CMakeFiles/main.dir/src/ANN.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/ANN.cpp -o CMakeFiles/main.dir/src/ANN.cpp.s
 
 CMakeFiles/main.dir/src/Activation.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/Activation.cpp.o: /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Activation.cpp
 CMakeFiles/main.dir/src/Activation.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ethanewer/Desktop/matrix-methods-cpp/ann/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main.dir/src/Activation.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/Activation.cpp.o -MF CMakeFiles/main.dir/src/Activation.cpp.o.d -o CMakeFiles/main.dir/src/Activation.cpp.o -c /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Activation.cpp
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/Activation.cpp.o -MF CMakeFiles/main.dir/src/Activation.cpp.o.d -o CMakeFiles/main.dir/src/Activation.cpp.o -c /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Activation.cpp
 
 CMakeFiles/main.dir/src/Activation.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/src/Activation.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Activation.cpp > CMakeFiles/main.dir/src/Activation.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Activation.cpp > CMakeFiles/main.dir/src/Activation.cpp.i
 
 CMakeFiles/main.dir/src/Activation.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/Activation.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Activation.cpp -o CMakeFiles/main.dir/src/Activation.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Activation.cpp -o CMakeFiles/main.dir/src/Activation.cpp.s
 
 CMakeFiles/main.dir/src/CNN.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/CNN.cpp.o: /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/CNN.cpp
 CMakeFiles/main.dir/src/CNN.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ethanewer/Desktop/matrix-methods-cpp/ann/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main.dir/src/CNN.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/CNN.cpp.o -MF CMakeFiles/main.dir/src/CNN.cpp.o.d -o CMakeFiles/main.dir/src/CNN.cpp.o -c /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/CNN.cpp
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/CNN.cpp.o -MF CMakeFiles/main.dir/src/CNN.cpp.o.d -o CMakeFiles/main.dir/src/CNN.cpp.o -c /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/CNN.cpp
 
 CMakeFiles/main.dir/src/CNN.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/src/CNN.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/CNN.cpp > CMakeFiles/main.dir/src/CNN.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/CNN.cpp > CMakeFiles/main.dir/src/CNN.cpp.i
 
 CMakeFiles/main.dir/src/CNN.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/CNN.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/CNN.cpp -o CMakeFiles/main.dir/src/CNN.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/CNN.cpp -o CMakeFiles/main.dir/src/CNN.cpp.s
 
 CMakeFiles/main.dir/src/Conv2D.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/Conv2D.cpp.o: /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Conv2D.cpp
 CMakeFiles/main.dir/src/Conv2D.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ethanewer/Desktop/matrix-methods-cpp/ann/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/main.dir/src/Conv2D.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/Conv2D.cpp.o -MF CMakeFiles/main.dir/src/Conv2D.cpp.o.d -o CMakeFiles/main.dir/src/Conv2D.cpp.o -c /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Conv2D.cpp
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/Conv2D.cpp.o -MF CMakeFiles/main.dir/src/Conv2D.cpp.o.d -o CMakeFiles/main.dir/src/Conv2D.cpp.o -c /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Conv2D.cpp
 
 CMakeFiles/main.dir/src/Conv2D.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/src/Conv2D.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Conv2D.cpp > CMakeFiles/main.dir/src/Conv2D.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Conv2D.cpp > CMakeFiles/main.dir/src/Conv2D.cpp.i
 
 CMakeFiles/main.dir/src/Conv2D.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/Conv2D.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Conv2D.cpp -o CMakeFiles/main.dir/src/Conv2D.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Conv2D.cpp -o CMakeFiles/main.dir/src/Conv2D.cpp.s
 
 CMakeFiles/main.dir/src/DataLoader.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/DataLoader.cpp.o: /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/DataLoader.cpp
 CMakeFiles/main.dir/src/DataLoader.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ethanewer/Desktop/matrix-methods-cpp/ann/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/main.dir/src/DataLoader.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/DataLoader.cpp.o -MF CMakeFiles/main.dir/src/DataLoader.cpp.o.d -o CMakeFiles/main.dir/src/DataLoader.cpp.o -c /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/DataLoader.cpp
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/DataLoader.cpp.o -MF CMakeFiles/main.dir/src/DataLoader.cpp.o.d -o CMakeFiles/main.dir/src/DataLoader.cpp.o -c /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/DataLoader.cpp
 
 CMakeFiles/main.dir/src/DataLoader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/src/DataLoader.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/DataLoader.cpp > CMakeFiles/main.dir/src/DataLoader.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/DataLoader.cpp > CMakeFiles/main.dir/src/DataLoader.cpp.i
 
 CMakeFiles/main.dir/src/DataLoader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/DataLoader.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/DataLoader.cpp -o CMakeFiles/main.dir/src/DataLoader.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/DataLoader.cpp -o CMakeFiles/main.dir/src/DataLoader.cpp.s
 
 CMakeFiles/main.dir/src/Dense.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/Dense.cpp.o: /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Dense.cpp
 CMakeFiles/main.dir/src/Dense.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ethanewer/Desktop/matrix-methods-cpp/ann/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/main.dir/src/Dense.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/Dense.cpp.o -MF CMakeFiles/main.dir/src/Dense.cpp.o.d -o CMakeFiles/main.dir/src/Dense.cpp.o -c /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Dense.cpp
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/Dense.cpp.o -MF CMakeFiles/main.dir/src/Dense.cpp.o.d -o CMakeFiles/main.dir/src/Dense.cpp.o -c /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Dense.cpp
 
 CMakeFiles/main.dir/src/Dense.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/src/Dense.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Dense.cpp > CMakeFiles/main.dir/src/Dense.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Dense.cpp > CMakeFiles/main.dir/src/Dense.cpp.i
 
 CMakeFiles/main.dir/src/Dense.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/Dense.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Dense.cpp -o CMakeFiles/main.dir/src/Dense.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/Dense.cpp -o CMakeFiles/main.dir/src/Dense.cpp.s
 
 CMakeFiles/main.dir/src/data.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/data.cpp.o: /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/data.cpp
 CMakeFiles/main.dir/src/data.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ethanewer/Desktop/matrix-methods-cpp/ann/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/main.dir/src/data.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/data.cpp.o -MF CMakeFiles/main.dir/src/data.cpp.o.d -o CMakeFiles/main.dir/src/data.cpp.o -c /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/data.cpp
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/data.cpp.o -MF CMakeFiles/main.dir/src/data.cpp.o.d -o CMakeFiles/main.dir/src/data.cpp.o -c /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/data.cpp
 
 CMakeFiles/main.dir/src/data.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/src/data.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/data.cpp > CMakeFiles/main.dir/src/data.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/data.cpp > CMakeFiles/main.dir/src/data.cpp.i
 
 CMakeFiles/main.dir/src/data.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/data.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/data.cpp -o CMakeFiles/main.dir/src/data.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/data.cpp -o CMakeFiles/main.dir/src/data.cpp.s
 
 CMakeFiles/main.dir/src/main.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/src/main.cpp.o: /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/main.cpp
 CMakeFiles/main.dir/src/main.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/ethanewer/Desktop/matrix-methods-cpp/ann/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/main.dir/src/main.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/main.cpp.o -MF CMakeFiles/main.dir/src/main.cpp.o.d -o CMakeFiles/main.dir/src/main.cpp.o -c /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/main.cpp
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/src/main.cpp.o -MF CMakeFiles/main.dir/src/main.cpp.o.d -o CMakeFiles/main.dir/src/main.cpp.o -c /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/main.cpp
 
 CMakeFiles/main.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/src/main.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/main.cpp > CMakeFiles/main.dir/src/main.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/main.cpp > CMakeFiles/main.dir/src/main.cpp.i
 
 CMakeFiles/main.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/main.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/main.cpp -o CMakeFiles/main.dir/src/main.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/ethanewer/Desktop/matrix-methods-cpp/ann/src/main.cpp -o CMakeFiles/main.dir/src/main.cpp.s
 
 # Object files for target main
 main_OBJECTS = \
