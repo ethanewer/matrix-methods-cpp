@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/c++  -O3 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names -L/opt/homebrew/Cellar/libomp/17.0.6/lib -lomp -L/Users/ethanewer/Desktop/matrix-methods-cpp/MatrixMethods/build CMakeFiles/main.dir/src/main.cpp.o -o main  -lmatrix_methods_library 

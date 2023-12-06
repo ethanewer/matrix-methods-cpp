@@ -1,3 +1,0 @@
-/Users/ethanewer/Desktop/matrix-methods-cpp/linear-regression/build/CMakeFiles/main.dir
-/Users/ethanewer/Desktop/matrix-methods-cpp/linear-regression/build/CMakeFiles/edit_cache.dir
-/Users/ethanewer/Desktop/matrix-methods-cpp/linear-regression/build/CMakeFiles/rebuild_cache.dir

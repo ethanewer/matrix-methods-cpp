@@ -1,3 +1,0 @@
-/Users/ethanewer/Desktop/matrix-methods-cpp/k-means/build/CMakeFiles/main.dir
-/Users/ethanewer/Desktop/matrix-methods-cpp/k-means/build/CMakeFiles/edit_cache.dir
-/Users/ethanewer/Desktop/matrix-methods-cpp/k-means/build/CMakeFiles/rebuild_cache.dir

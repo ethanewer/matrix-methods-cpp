@@ -1,3 +1,0 @@
-/Users/ethanewer/Desktop/matrix-methods-cpp/isvt/build/CMakeFiles/main.dir
-/Users/ethanewer/Desktop/matrix-methods-cpp/isvt/build/CMakeFiles/edit_cache.dir
-/Users/ethanewer/Desktop/matrix-methods-cpp/isvt/build/CMakeFiles/rebuild_cache.dir
