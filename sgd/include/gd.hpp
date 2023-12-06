@@ -46,7 +46,7 @@ VectorXd sgd_ridge(const MatrixXd& X, const VectorXd& y, double lam, double tau)
 VectorXd sgd_lasso(const MatrixXd& X, const VectorXd& y, double lam, double tau) {
 	int m = X.rows(), n = X.cols();
 	std::random_device rd;
-  std::mt19937 gen(rd());
+  	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dist(0, m - 1);
 	VectorXd w = VectorXd::Zero(n);
 	for (int k = 0; k < m * NUM_ITERS; k++) {
@@ -59,7 +59,7 @@ VectorXd sgd_lasso(const MatrixXd& X, const VectorXd& y, double lam, double tau)
 VectorXd sgd_svm(const MatrixXd& X, const VectorXd& y, double lam, double tau) {
 	int m = X.rows(), n = X.cols();
 	std::random_device rd;
-  std::mt19937 gen(rd());
+  	std::mt19937 gen(rd());
 	std::uniform_int_distribution<> dist(0, m - 1);
 	VectorXd w = VectorXd::Zero(n);
 	for (int k = 0; k < m * NUM_ITERS; k++) {
