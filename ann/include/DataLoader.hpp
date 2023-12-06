@@ -9,8 +9,8 @@ public:
 	MatrixDataLoader(
 		const std::string& data_path, 
 		const std::string& label_path, 
-		int data_size, 
-		int label_size, 
+		int data_row_size, 
+		int label_row_size, 
 		int batch_size
 	);
 	
@@ -19,8 +19,8 @@ public:
 private:
 	std::string data_path;
 	std::string label_path;
-	int data_size;
-	int label_size;
+	int data_row_size;
+	int label_row_size;
 	int batch_size;
 	std::ifstream data_file;
 	std::ifstream label_file;
@@ -32,7 +32,7 @@ public:
 		const std::string& data_path, 
 		const std::string& label_path, 
 		const std::array<int, 3>& data_shape, 
-		int label_size, 
+		int label_row_size, 
 		int batch_size
 	);
 	
@@ -44,7 +44,7 @@ private:
 	int d;
 	int m;
 	int n;
-	int label_size;
+	int label_row_size;
 	int batch_size;
 	std::ifstream data_file;
 	std::ifstream label_file;

@@ -24,7 +24,7 @@ int main() {
 		784, 10, batch_size
 	);
 
-	std::string model_path = "../models/fashion/784-96-32-10/model_";
+	std::string model_path = "../models/fashion/ann-1/model_";
 
 	ANN model(
 		{

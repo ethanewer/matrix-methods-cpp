@@ -11,7 +11,6 @@ Dense::Dense(const std::string& weights_path, const std::string& bias_path) {
 	bias = csv2vector(bias_path);
 }
 
-
 VectorXd Dense::forward(const VectorXd& input) {
 	this->input = input;
 	return weights * input + bias;

@@ -19,17 +19,8 @@ std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> split_data(const MatrixXd& X,
 
 std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_credit_card_fraud_data();
 
-std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_gd_data();
-
 std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_digits_data();
 
 std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_fashion_data();
-
-std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_chicken_data();
-
-std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_cats_vs_dogs_data();
-
-std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_cats_vs_dogs_data(int max_rows);
-
 
 #endif

@@ -46,3 +46,48 @@ VectorXd SoftmaxCategoricalCrossentropy::forward(const VectorXd& input) {
 VectorXd SoftmaxCategoricalCrossentropy::backward(const VectorXd& y_true, double lr) {
 	return activation - y_true;
 }
+
+ConvReLU::ConvReLU(const std::array<int, 3>& input_shape) {
+	this->input_shape = input_shape;
+	this->output_shape = input_shape;
+}
+
+Tensor3d ConvReLU::forward(const Tensor3d& input) {
+	activation = input.cwiseMax(0.0);
+	return activation;
+}
+
+Tensor3d ConvReLU::backward(const Tensor3d& output_grad, double lr) {
+	return output_grad * activation.sign();
+}
+
+ConvSigmoid::ConvSigmoid(const std::array<int, 3>& input_shape) {
+	this->input_shape = input_shape;
+	this->output_shape = input_shape;
+}
+
+Tensor3d ConvSigmoid::forward(const Tensor3d& input) {
+	activation = 1.0 / (1.0 + input.exp());
+	return activation;
+}
+
+Tensor3d ConvSigmoid::backward(const Tensor3d& output_grad, double lr) {
+	return output_grad * activation * (1 - activation);
+}
+
+
+ConvTanh::ConvTanh(const std::array<int, 3>& input_shape) {
+	this->input_shape = input_shape;
+	this->output_shape = input_shape;
+}
+
+Tensor3d ConvTanh::forward(const Tensor3d& input) {
+	Tensor3d exp_input = input.exp();
+	Tensor3d exp_neg_input = (-input).exp();
+	activation = (exp_input - exp_neg_input) / (exp_input + exp_neg_input);
+	return activation;
+}
+
+Tensor3d ConvTanh::backward(const Tensor3d& output_grad, double lr) {
+	return output_grad * (1.0 - activation.square());
+}

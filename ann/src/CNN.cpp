@@ -1,4 +1,6 @@
 #include <CNN.hpp>
+#include <Conv2D.hpp>
+#include <Dense.hpp>
 
 CNN::CNN(
 	const std::vector<ConvLayer*>& conv_layers,
@@ -32,6 +34,28 @@ void CNN::update(const VectorXd& y_true, double lr) {
 
 	for (int i = conv_layers.size() - 1; i >= 0; i--) {
 		conv_grad = conv_layers[i]->backward(conv_grad, lr);
+	}
+}
+
+void CNN::save(const std::string& prefix) {
+	for (int i = 0; i < conv_layers.size(); i++) {
+		if (Conv2D* conv = dynamic_cast<Conv2D*>(conv_layers[i])) {
+			std::string file_prefix = prefix + "_conv_" + std::to_string(i);
+			conv->save(file_prefix  + "_kernels.csv", file_prefix + "_biases.csv");
+		} else if (Conv2DL2* conv_l2 = dynamic_cast<Conv2DL2*>(conv_layers[i])) {
+			std::string file_prefix = prefix + "_conv_" + std::to_string(i);
+			conv_l2->save(file_prefix  + "_kernels.csv", file_prefix + "_biases.csv");
+		}
+	}
+
+	for (int i = 0; i < dense_layers.size(); i++) {
+		if (Dense* dense = dynamic_cast<Dense*>(dense_layers[i])) {
+			std::string file_prefix = prefix + "_dense_" + std::to_string(i);
+			dense->save(file_prefix  + "_weights.csv", file_prefix + "_bias.csv");
+		} else if (DenseL2* dense_l2 = dynamic_cast<DenseL2*>(dense_layers[i])) {
+			std::string file_prefix = prefix + "_dense_" + std::to_string(i);
+			dense_l2->save(file_prefix  + "_weights.csv", file_prefix + "_bias.csv");
+		}
 	}
 }
 

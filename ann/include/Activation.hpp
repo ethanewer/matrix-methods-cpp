@@ -50,4 +50,31 @@ private:
 	VectorXd activation;
 };
 
+class ConvReLU : public ConvLayer {
+public:
+	ConvReLU(const std::array<int, 3>& input_shape);
+	Tensor3d forward(const Tensor3d& input) override;
+	Tensor3d backward(const Tensor3d& output_grad, double lr) override;
+
+	Tensor3d activation;
+};
+
+class ConvSigmoid : public ConvLayer {
+public:
+	ConvSigmoid(const std::array<int, 3>& input_shape);
+	Tensor3d forward(const Tensor3d& input) override;
+	Tensor3d backward(const Tensor3d& output_grad, double lr) override;
+
+	Tensor3d activation;
+};
+
+class ConvTanh : public ConvLayer {
+public:
+	ConvTanh(const std::array<int, 3>& input_shape);
+	Tensor3d forward(const Tensor3d& input) override;
+	Tensor3d backward(const Tensor3d& output_grad, double lr) override;
+
+	Tensor3d activation;
+};
+
 #endif

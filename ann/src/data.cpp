@@ -2,6 +2,9 @@
 
 VectorXd csv2vector(const std::string& path) {
 	std::ifstream file(path);
+	if (!file.is_open()) {
+		throw std::runtime_error("Unable to open file '" + path + "'");
+	}
 	std::string line;
 	int m = 0;
 	while (std::getline(file, line)) {
@@ -17,8 +20,32 @@ VectorXd csv2vector(const std::string& path) {
 	return x;
 }
 
+VectorXd csv2vector(const std::string& path, int max_size) {
+	std::ifstream file(path);
+	if (!file.is_open()) {
+		throw std::runtime_error("Unable to open file '" + path + "'");
+	}
+	std::string line;
+	int m = 0;
+	while (m < max_size && std::getline(file, line)) {
+		m++;
+	}
+	file.close();
+	file.open(path);
+	VectorXd x(m);
+	for (int i = 0; i < m; i++) {
+		std::getline(file, line);
+		x(i) = stod(line);
+	}
+	file.close();
+	return x;
+}
+
 MatrixXd csv2matrix(const std::string& path) {
 	std::ifstream file(path);
+	if (!file.is_open()) {
+		throw std::runtime_error("Unable to open file '" + path + "'");
+	}
 	std::string line;
 	int m = 0, n = 0;
 	while (std::getline(file, line)) {
@@ -43,8 +70,41 @@ MatrixXd csv2matrix(const std::string& path) {
 	return X;
 }
 
+MatrixXd csv2matrix(const std::string& path, int max_size) {
+	std::ifstream file(path);
+	if (!file.is_open()) {
+		throw std::runtime_error("Unable to open file '" + path + "'");
+	}
+	std::string line;
+	int m = 0, n = 0;
+	while (m < max_size && std::getline(file, line)) {
+		m++;
+		if (n == 0) {
+			std::istringstream ss(line);
+			std::string cell;
+			while (std::getline(ss, cell, ',')) n++;
+		}
+	}
+	file.close();
+	file.open(path);
+	MatrixXd X(m, n);
+	for (int i = 0; i < m; i++) {
+		std::getline(file, line);
+		std::istringstream ss(line);
+		std::string cell;
+		for (int j = 0; std::getline(ss, cell, ','); j++) {
+			X(i, j) = std::stod(cell);
+		}
+	}
+	file.close();
+	return X;
+}
+
 MatrixXd csv2matrix_with_ones(const std::string& path) {
 	std::ifstream file(path);
+	if (!file.is_open()) {
+		throw std::runtime_error("Unable to open file '" + path + "'");
+	}
 	std::string line;
 	int m = 0, n = 0;
 	while (std::getline(file, line)) {
@@ -59,51 +119,6 @@ MatrixXd csv2matrix_with_ones(const std::string& path) {
 	file.open(path);
 	MatrixXd X = MatrixXd::Ones(m, n + 1);
 	for (int i = 0; std::getline(file, line); i++) {
-		std::istringstream ss(line);
-		std::string cell;
-		for (int j = 0; std::getline(ss, cell, ','); j++) {
-			X(i, j) = std::stod(cell);
-		}
-	}
-	file.close();
-	return X;
-}
-
-VectorXd csv2vector(const std::string& path, int max_size) {
-	std::ifstream file(path);
-	std::string line;
-	int m = 0;
-	while (m < max_size && std::getline(file, line)) {
-		m++;
-	}
-	file.close();
-	file.open(path);
-	VectorXd x(m);
-	for (int i = 0; i < m; i++) {
-		std::getline(file, line);
-		x(i) = stod(line);
-	}
-	file.close();
-	return x;
-}
-
-MatrixXd csv2matrix(const std::string& path, int max_size) {
-	std::ifstream file(path);
-	std::string line;
-	int m = 0, n = 0;
-	while (m < max_size && std::getline(file, line)) {
-		m++;
-		if (n == 0) {
-			std::istringstream ss(line);
-			std::string cell;
-			while (std::getline(ss, cell, ',')) n++;
-		}
-	}
-	file.close();
-	file.open(path);
-	MatrixXd X(m, n);
-	for (int i = 0; i < m; i++) {
-		std::getline(file, line);
 		std::istringstream ss(line);
 		std::string cell;
 		for (int j = 0; std::getline(ss, cell, ','); j++) {
@@ -169,15 +184,6 @@ std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_credit_card_fraud_data()
 	return split_data(X, y, 0.5, 0.5);
 }
 
-std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_gd_data() {
-	return {
-		csv2matrix("../../data/gd-data/X_train.csv"),
-		csv2matrix("../../data/gd-data/X_valid.csv"),
-		csv2vector("../../data/gd-data/y_train.csv").array().max(0),
-		csv2vector("../../data/gd-data/y_valid.csv").array().max(0)
-	};
-}
-
 std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_digits_data() {
 	MatrixXd X_train = csv2matrix("../../data/mnist-digits/X_train.csv");
 	MatrixXd X_test = csv2matrix("../../data/mnist-digits/X_test.csv");
@@ -194,25 +200,4 @@ std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_fashion_data() {
 	MatrixXd Y_valid = csv2matrix("../../data/mnist-fashion/y_test.csv");
 	
 	return {X_train, X_valid, Y_train, Y_valid};
-}
-
-std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_chicken_data() {
-	MatrixXd X = csv2matrix("../../data/chickens/X.csv");
-	MatrixXd y = csv2matrix("../../data/chickens/y.csv");
-	
-	return split_data(X, y, 0.5, 0.5);
-}
-
-std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_cats_vs_dogs_data() {
-	MatrixXd X = csv2matrix("../../data/cats-vs-dogs/X.csv");
-	MatrixXd y = csv2matrix("../../data/cats-vs-dogs/y.csv");
-	
-	return split_data(X, y, 0.5, 0.5);
-}
-
-std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_cats_vs_dogs_data(int max_rows) {
-	MatrixXd X = csv2matrix("../../data/cats-vs-dogs/X.csv", max_rows);
-	MatrixXd y = csv2matrix("../../data/cats-vs-dogs/y.csv", max_rows);
-	
-	return split_data(X, y, 0.5, 0.5);
 }

@@ -22,7 +22,7 @@ double test_binary_classifier(CNN& model, MatrixXd X, const VectorXd& y) {
 	int m = X.rows();
 	double error_count = 0;
 	for (int i = 0; i < m; i++) {
-		Tensor3d t = Eigen::TensorMap<Tensor3d>(X.row(i).data(), 1, 28, 28);
+		Tensor3d t = Eigen::TensorMap<Tensor3d>(X.row(i).data(), 1, 64, 64);
 		double pred = model.predict(t)(0) < 0.5 ? 0 : 1;
 		if (pred != y(i)) {
 			error_count++;
@@ -92,6 +92,7 @@ double test_multi_classifier(CNN& model, MatrixXd X, const MatrixXd& Y) {
 		VectorXd pred = model.predict(t);
 		if (pred.hasNaN() || !pred.allFinite()) {
 			std::cout << "BAD PRED: " << pred.transpose() << "\n\n";
+			return NAN;
 		}
 		int max_pred_idx = 0, max_y_idx = 0;
 		double max_pred_val = pred(0), max_y_val = Y(i, 0);

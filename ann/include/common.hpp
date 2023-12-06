@@ -21,7 +21,5 @@ using Eigen::VectorXi;
 using Tensor2d = Eigen::Tensor<double, 2, Eigen::RowMajor>;
 using Tensor3d = Eigen::Tensor<double, 3, Eigen::RowMajor>;
 using Tensor4d = Eigen::Tensor<double, 4, Eigen::RowMajor>;
-using ActivationFn = std::function<VectorXd(const VectorXd&)>;
-using LossFn = std::function<VectorXd(const VectorXd&, const VectorXd&)>;
 
 #endif

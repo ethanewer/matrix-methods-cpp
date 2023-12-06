@@ -3,21 +3,21 @@
 MatrixDataLoader::MatrixDataLoader(
 	const std::string& data_path, 
 	const std::string& label_path, 
-	int data_size,
-	int label_size,
+	int data_row_size,
+	int label_row_size,
 	int batch_size
 ) : 
 	data_path(data_path), 
 	label_path(label_path), 
-	data_size(data_size),
-	label_size(label_size),
+	data_row_size(data_row_size),
+	label_row_size(label_row_size),
 	batch_size(batch_size),
 	data_file(std::ifstream(data_path)), 
 	label_file(std::ifstream(label_path)) {}
 
 std::tuple<MatrixXd, MatrixXd> MatrixDataLoader::get_batch() {
-	MatrixXd X(batch_size, data_size);
-	MatrixXd Y(batch_size, label_size);
+	MatrixXd X(batch_size, data_row_size);
+	MatrixXd Y(batch_size, label_row_size);
 
 	std::string data_row, label_row, cell;
 	for (int i = 0; i < batch_size; i++) {
@@ -46,7 +46,7 @@ TensorDataLoader::TensorDataLoader(
 	const std::string& data_path, 
 	const std::string& label_path, 
 	const std::array<int, 3>& data_shape, 
-	int label_size, 
+	int label_row_size, 
 	int batch_size
 ) : 
 	data_path(data_path), 
@@ -54,14 +54,14 @@ TensorDataLoader::TensorDataLoader(
 	d(data_shape[0]),
 	m(data_shape[1]),
 	n(data_shape[2]),
-	label_size(label_size),
+	label_row_size(label_row_size),
 	batch_size(batch_size),
 	data_file(std::ifstream(data_path)), 
 	label_file(std::ifstream(label_path)) {}
 
 std::tuple<Tensor4d, MatrixXd> TensorDataLoader::get_batch() {
 	Tensor4d X(batch_size, d, m, n);
-	MatrixXd Y(batch_size, label_size);
+	MatrixXd Y(batch_size, label_row_size);
 
 	std::string data_row, label_row, cell;
 	for (int i = 0; i < batch_size; i++) {

@@ -9,7 +9,7 @@
 #include <util.hpp>
 
 int main() {
-	double lr = 1e-4;
+	double lr = 5e-4;
 	double lam = 1e-3;
 	
 	auto [X_train, X_test, y_train, y_test] = load_mnist_fashion_data();
