@@ -1,11 +1,5 @@
-#include <common.hpp>
-#include <Dense.hpp>
-#include <Conv2D.hpp>
-#include <Activation.hpp>
-#include <ANN.hpp>
-#include <CNN.hpp>
-#include <DataLoader.hpp>
-#include <data.hpp>
+#include <MatrixMethods>
+#include <load_data.hpp>
 #include <util.hpp>
 
 int main() {
@@ -29,17 +23,17 @@ int main() {
 	// 	new SigmoidBinaryCrossentropy()
 	// );
 	
-	CNN model(
+	mm::CNN model(
 		{	
-			new Conv2DL2({1, 28, 28}, 3, 8, lam,  model_path + "_conv_0_kernels.csv", model_path + "_conv_0_biases.csv"),
-			new ConvTanh({8, 26, 26}),
-			new MaxPooling({8, 26, 26}, 2),
+			new mm::Conv2DL2({1, 28, 28}, 3, 8, lam,  model_path + "_conv_0_kernels.csv", model_path + "_conv_0_biases.csv"),
+			new mm::ConvTanh({8, 26, 26}),
+			new mm::MaxPooling({8, 26, 26}, 2),
 		}, {
-			new DenseL2(model_path + "_dense_0_weights.csv", model_path + "_dense_0_bias.csv", lam),
-			new ReLU(),
-			new DenseL2(model_path + "_dense_2_weights.csv", model_path + "_dense_2_bias.csv", lam),
+			new mm::DenseL2(model_path + "_dense_0_weights.csv", model_path + "_dense_0_bias.csv", lam),
+			new mm::ReLU(),
+			new mm::DenseL2(model_path + "_dense_2_weights.csv", model_path + "_dense_2_bias.csv", lam),
 		},
-		new SigmoidBinaryCrossentropy()
+		new mm::SigmoidBinaryCrossentropy()
 	);
 
 	double min_error_rate = test_multi_classifier(model, X_test, y_test);

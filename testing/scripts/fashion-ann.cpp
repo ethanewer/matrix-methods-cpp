@@ -1,24 +1,18 @@
-#include <common.hpp>
-#include <Dense.hpp>
-#include <Activation.hpp>
-#include <Conv2D.hpp>
-#include <ANN.hpp>
-#include <CNN.hpp>
-#include <DataLoader.hpp>
-#include <data.hpp>
+#include <MatrixMethods>
+#include <load_data.hpp>
 #include <util.hpp>
 
 int main() {
 	int batch_size = 5000;
 	double lr = 1e-3;
 
-	MatrixDataLoader train_data(
+	mm::MatrixDataLoader train_data(
 		"../../data/mnist-fashion/X_train.csv", 
 		"../../data/mnist-fashion/y_train.csv",
 		784, 10, batch_size
 	);
 
-	MatrixDataLoader test_data(
+	mm::MatrixDataLoader test_data(
 		"../../data/mnist-fashion/X_test.csv", 
 		"../../data/mnist-fashion/y_test.csv",
 		784, 10, batch_size
@@ -26,15 +20,15 @@ int main() {
 
 	std::string model_path = "../models/fashion/ann-1/model_";
 
-	ANN model(
+	mm::ANN model(
 		{
-			new DenseL2(model_path + "layer_0_weights.csv", model_path + "layer_0_bias.csv", 1e-3),
-			new ReLU(),
-			new DenseL2(model_path + "layer_2_weights.csv", model_path + "layer_2_bias.csv", 1e-3),
-			new ReLU(),
-			new DenseL2(model_path + "layer_4_weights.csv", model_path + "layer_4_bias.csv", 1e-3),
+			new mm::DenseL2(model_path + "layer_0_weights.csv", model_path + "layer_0_bias.csv", 1e-3),
+			new mm::ReLU(),
+			new mm::DenseL2(model_path + "layer_2_weights.csv", model_path + "layer_2_bias.csv", 1e-3),
+			new mm::ReLU(),
+			new mm::DenseL2(model_path + "layer_4_weights.csv", model_path + "layer_4_bias.csv", 1e-3),
 		},
-		new SoftmaxCategoricalCrossentropy()
+		new mm::SoftmaxCategoricalCrossentropy()
 	);
 
 	for (int batch_num = 0; batch_num < 1000; batch_num++) {
