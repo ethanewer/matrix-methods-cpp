@@ -44,5 +44,6 @@ Matrix methods C++ library for machine learning
 - Support Vector Machine
 - Kernel Regression (L2 regularization and Support Vector Machine)
 - Neural Networks (Convolutional and Dense layers)
+- ReLU, Clipped ReLU, Tanh, Sigmoid, and Softmax activation functions
 - Data Loader 
     
