@@ -1,36 +1,46 @@
 #include <MatrixMethods>
-#include <load_data.hpp>
 #include <util.hpp>
 
 int main() {
-	double lr = 1e-3;
-	double lam = 1e-3;
+	double lr = 0.5;
 	
-	auto [X_train, X_test, y_train, y_test] = load_mnist_digits_data();
+	MatrixXd X = mm::csv2matrix_with_ones("../../data/face-emotion/X.csv");
+	VectorXd y = mm::csv2vector("../../data/face-emotion/y.csv");
+	y = y.array().max(0);
 
-	mm::CNN model(
-		{	
-			new mm::Conv2DL2({1, 28, 28}, 3, 8, lam),
-			new mm::ConvTanh({8, 26, 26}),
-			new mm::MaxPooling({8, 26, 26}, 2),
-		}, {
-			new mm::DenseL2(8 * 13 * 13, 64, lam),
-			new mm::ReLU(),
-			new mm::DenseL2(64, 10, lam),
+	int m = X.rows(), n = X.cols();
+	
+	mm::ANN model(
+		{
+			new mm::Dense(10, 32),
+			new mm::Sigmoid(),
+			new mm::Dense(32, 1),
 		},
 		new mm::SigmoidBinaryCrossentropy()
 	);
 	
-	for (int epoch = 0; epoch < 1000; epoch++) {
-		for (int i = 0; i < X_train.rows(); i++) {
-			VectorXd row = X_train.row(i);
-			model.predict(Eigen::TensorMap<Tensor3d>(row.data(), 1, 28, 28));
-			model.update(y_train.row(i), lr);
+	double error_sum = 0;
+	int num_groups = 8;
+	int test_size = m / num_groups;
+
+	for (int group = 0; group < num_groups; group++) {
+		int test_begin = group * test_size;
+		int test_end = test_begin + test_size;
+		MatrixXd X_test = X.block(test_begin, 0, test_size, n);
+		VectorXd y_test = y.segment(test_begin, test_size);
+
+		for (int epoch = 0; epoch < 200; epoch++) {
+			for (int i = 0; i < X.rows(); i++) {
+				if (test_begin <= i && i < test_end) {
+					continue;
+				}
+				model.predict(X.row(i));
+				model.update(y.row(i), lr);
+			}
 		}
 
-		if (epoch < 10 || (epoch + 1) % 10 == 0) {
-			std::cout << "[epoch " << epoch + 1 << "] ";
-			std::cout << "error rate: " << 100.0 * test_multi_classifier(model, X_test, y_test) << "%\n";
-		}
+		error_sum += test_binary_classifier(model, X_test, y_test);
 	}
+	
+	std::cout << "Error rate: " << error_sum / num_groups << '\n';
 }
