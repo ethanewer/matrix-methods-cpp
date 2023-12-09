@@ -165,6 +165,15 @@ double test_multi_classifier(mm::CNN& model, mm::TensorDataLoader& data) {
 	return error_count / batch_size;
 }
 
+double test_binary_preds(const VectorXd& preds, const VectorXd& y) {
+	double error_count = 0.0;
+	for (int k = 0; k < y.size(); k++) {
+		double pred = preds(k) < 0 ? -1 : 1;
+		if (pred != y(k)) error_count += 1;
+	}
+	return error_count / y.size();
+}
+
 template<typename Fn, typename... Args>
 auto time_fn(Fn&& fn, Args&&... args) {
 	auto start = std::chrono::high_resolution_clock::now();

@@ -62,8 +62,16 @@ std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_fashion_data() {
 std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_face_emotion_data() {
 	MatrixXd X = mm::csv2matrix("../../data/face-emotion/X.csv");
 	VectorXd y = mm::csv2vector("../../data/face-emotion/y.csv");
-	y = y.array().max(0);
-	return mm::split_data(X, y, 0.8, 0.2);
+	return mm::split_data(X, y, 0.75, 0.25);
+}
+
+std::tuple<MatrixXd, MatrixXd, VectorXd, VectorXd> load_easy_data() {
+	return {
+		mm::csv2matrix("../../data/gd-data/X_train.csv"),
+		mm::csv2matrix("../../data/gd-data/X_valid.csv"),
+		mm::csv2vector("../../data/gd-data/y_train.csv"),
+		mm::csv2vector("../../data/gd-data/y_valid.csv"),
+	};
 }
 
 #endif

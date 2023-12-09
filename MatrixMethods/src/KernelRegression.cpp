@@ -9,24 +9,35 @@ KernelRegressionL2::KernelRegressionL2(std::function<double(const VectorXd&, con
 void KernelRegressionL2::fit(const MatrixXd& X, const VectorXd& y, double lam) {
     X_train = X;
     int m = X_train.rows();
-    MatrixXd K = MatrixXd(m, m);
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < m; j++) {
-            K(i, j) = kernel_fn(X_train.row(i), X_train.row(j));
-        }
-    }
+    MatrixXd K = make_kernel(X_train, X_train, kernel_fn);
     a = (K + lam * MatrixXd::Identity(m, m)).inverse() * y;
 }
 
-VectorXd KernelRegressionL2::predict(const MatrixXd& X_pred) {
-    int m_train = X_train.rows(), m_pred = X_pred.rows();
-    MatrixXd K = MatrixXd(m_pred, m_train);
-    for (int i = 0; i < m_pred; i++) {
-        for (int j = 0; j < m_train; j++) {
-            K(i, j) = kernel_fn(X_pred.row(i), X_train.row(j));
-        }
+void KernelRegressionL2::fit(const MatrixXd& X, const VectorXd& y, double lam, int num_iters, double lr) {
+    X_train = X;
+    int m = X_train.rows();
+    MatrixXd K = make_kernel(X_train, X_train, kernel_fn);
+    a = VectorXd::Random(m);
+    for (int i = 0; i < num_iters; i++) {
+        // w -= lr * X.transpose() * (X * w - y);
+		a -= lr * (K * (K * a - y) + lam * K * a);
     }
-    return K * a;
+}
+
+void KernelRegressionL2::fit(const MatrixXd& X, const VectorXd& y, double lam, double tol, double lr) {
+    X_train = X;
+    int m = X_train.rows();
+    MatrixXd K = make_kernel(X_train, X_train, kernel_fn);
+    a = VectorXd::Random(m);
+    for (int i = 0; i < MAX_ITERS; i++) {
+		VectorXd grad = K * (K * a - y + lam * a);
+		a -= lr * grad;
+        if (grad.norm() < tol) break;
+    }
+}
+
+VectorXd KernelRegressionL2::predict(const MatrixXd& X_pred) {
+    return make_kernel(X_pred, X_train, kernel_fn) * a;
 }
 
 KernelSVM::KernelSVM(std::function<double(const VectorXd&, const VectorXd&)> kernel_fn) : kernel_fn(kernel_fn) {}
@@ -34,14 +45,7 @@ KernelSVM::KernelSVM(std::function<double(const VectorXd&, const VectorXd&)> ker
 void KernelSVM::fit(const MatrixXd& X, const VectorXd& y, double lam, int num_iters, double lr) {
     X_train = X;
     int m = X_train.rows();
-    MatrixXd K = MatrixXd(m, m);
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < m; j++) {
-            K(i, j) = kernel_fn(X_train.row(i), X_train.row(j));
-        }
-    }
-
-
+    MatrixXd K = make_kernel(X_train, X_train, kernel_fn);
     a = VectorXd::Random(m);
     for (int i = 0; i < num_iters; i++) {
         VectorXd pred = K * a;
@@ -58,13 +62,7 @@ void KernelSVM::fit(const MatrixXd& X, const VectorXd& y, double lam, int num_it
 void KernelSVM::fit(const MatrixXd& X, const VectorXd& y, double lam, double tol, double lr) {
     X_train = X;
     int m = X_train.rows();
-    MatrixXd K = MatrixXd(m, m);
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < m; j++) {
-            K(i, j) = kernel_fn(X_train.row(i), X_train.row(j));
-        }
-    }
-
+    MatrixXd K = make_kernel(X_train, X_train, kernel_fn);
     a = VectorXd::Random(m);
     for (int i = 0; i < MAX_ITERS; i++) {
         VectorXd pred = K * a;
@@ -80,12 +78,16 @@ void KernelSVM::fit(const MatrixXd& X, const VectorXd& y, double lam, double tol
 }
 
 VectorXd KernelSVM::predict(const MatrixXd& X_pred) {
-    int m_train = X_train.rows(), m_pred = X_pred.rows();
-    MatrixXd K = MatrixXd(m_pred, m_train);
-    for (int i = 0; i < m_pred; i++) {
-        for (int j = 0; j < m_train; j++) {
-            K(i, j) = kernel_fn(X_pred.row(i), X_train.row(j));
+    return make_kernel(X_pred, X_train, kernel_fn) * a;
+}
+
+MatrixXd mm::make_kernel(const MatrixXd& X1, const MatrixXd& X2, std::function<double(const VectorXd&, const VectorXd&)> kernel_fn) {
+    int m1 = X1.rows(), m2 = X2.rows();
+    MatrixXd K = MatrixXd(m1, m2);
+    for (int i = 0; i < m1; i++) {
+        for (int j = 0; j < m2; j++) {
+            K(i, j) = kernel_fn(X1.row(i), X2.row(j));
         }
     }
-    return K * a;
+    return K;
 }
