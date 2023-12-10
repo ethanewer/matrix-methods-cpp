@@ -168,10 +168,34 @@ double test_multi_classifier(mm::CNN& model, mm::TensorDataLoader& data) {
 double test_binary_preds(const VectorXd& preds, const VectorXd& y) {
 	double error_count = 0.0;
 	for (int k = 0; k < y.size(); k++) {
-		double pred = preds(k) < 0 ? -1 : 1;
+		double pred = preds(k) < 0.5 ? 0 : 1;
 		if (pred != y(k)) error_count += 1;
 	}
 	return error_count / y.size();
+}
+
+double test_multi_preds(const MatrixXd& preds, const MatrixXd& Y) {
+	int m = Y.rows(), n = Y.cols();
+	double error_count = 0;
+	for (int i = 0; i < m; i++) {
+		int max_pred_idx = 0, max_y_idx = 0;
+		double max_pred_val = preds(i, 0), max_y_val = Y(i, 0);
+		for (int j = 0; j < n; j++) {
+			if (preds(i, j) > max_pred_val) {
+				max_pred_idx = j;
+				max_pred_val = preds(i, j);
+			}
+			if (Y(i, j) > max_y_val) {
+				max_y_idx = j;
+				max_y_val = Y(i, j);
+			}
+		}
+
+		if (max_pred_idx != max_y_idx) {
+			error_count++;
+		}
+	}
+	return error_count / m;
 }
 
 template<typename Fn, typename... Args>

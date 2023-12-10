@@ -50,6 +50,15 @@ std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_digits_data() {
 	return {X_train, X_test, Y_train, Y_test};
 }
 
+std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_digits_data(int max_rows) {
+	MatrixXd X_train = mm::csv2matrix("../../data/mnist-digits/X_train.csv", max_rows);
+	MatrixXd X_test = mm::csv2matrix("../../data/mnist-digits/X_test.csv", max_rows);
+	MatrixXd Y_train = mm::csv2matrix("../../data/mnist-digits/Y_train.csv", max_rows);
+	MatrixXd Y_test = mm::csv2matrix("../../data/mnist-digits/Y_test.csv", max_rows);
+	
+	return {X_train, X_test, Y_train, Y_test};
+}
+
 std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_fashion_data() {
 	MatrixXd X_train = mm::csv2matrix("../../data/mnist-fashion/X_train.csv");
 	MatrixXd X_valid = mm::csv2matrix("../../data/mnist-fashion/X_test.csv");
@@ -57,6 +66,15 @@ std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_fashion_data() {
 	MatrixXd Y_valid = mm::csv2matrix("../../data/mnist-fashion/y_test.csv");
 	
 	return {X_train, X_valid, Y_train, Y_valid};
+}
+
+std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_mnist_fashion_data(int max_rows) {
+	MatrixXd X_train = mm::csv2matrix("../../data/mnist-fashion/X_train.csv", max_rows);
+	MatrixXd X_test = mm::csv2matrix("../../data/mnist-fashion/X_test.csv", max_rows);
+	MatrixXd Y_train = mm::csv2matrix("../../data/mnist-fashion/Y_train.csv", max_rows);
+	MatrixXd Y_test = mm::csv2matrix("../../data/mnist-fashion/Y_test.csv", max_rows);
+	
+	return {X_train, X_test, Y_train, Y_test};
 }
 
 std::tuple<MatrixXd, MatrixXd, MatrixXd, MatrixXd> load_face_emotion_data() {
