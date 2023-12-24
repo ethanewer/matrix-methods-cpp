@@ -6,7 +6,7 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/opt/homebrew/include -I/opt/homebrew/Cellar/libomp/17.0.6/include -I/Users/ethanewer/Desktop/matrix-methods-cpp/MatrixMethods/include -I/Users/ethanewer/Desktop/matrix-methods-cpp/testing/include
 
-CXX_FLAGSarm64 =  -O3 -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -Xpreprocessor -fopenmp
+CXX_FLAGSarm64 =  -O3 -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk -Xpreprocessor -fopenmp
 
-CXX_FLAGS =  -O3 -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk -Xpreprocessor -fopenmp
+CXX_FLAGS =  -O3 -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk -Xpreprocessor -fopenmp
 

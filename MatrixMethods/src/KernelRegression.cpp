@@ -75,9 +75,7 @@ void KernelSVM::fit(const MatrixXd& X, const VectorXd& y, double lam, int num_it
         VectorXd pred = K * a;
 		VectorXd grad = lam * pred;
 		for (int j = 0; j < m; j++) {
-            for (int k = 0; k < m; k++) {
-				if (y(j) * pred(j) < 1) grad(k) -= y(j) * K(j, k);
-			}
+            if (y(j) * pred(j) < 1) grad -= y(j) * K.row(j);
 		}
 		a -= lr * grad;
     }
@@ -92,9 +90,7 @@ void KernelSVM::fit(const MatrixXd& X, const VectorXd& y, double lam, double tol
         VectorXd pred = K * a;
 		VectorXd grad = lam * pred;
 		for (int j = 0; j < m; j++) {
-            for (int k = 0; k < m; k++) {
-				if (y(j) * pred(j) < 1) grad(k) -= y(j) * K(j, k);
-			}
+            if (y(j) * pred(j) < 1) grad -= y(j) * K.row(j);
 		}
 		a -= lr * grad;
         if (grad.norm() < tol) break;
@@ -109,9 +105,7 @@ void KernelSVM::fit_with_kernel_matrix(const MatrixXd& X, const MatrixXd& K, con
         VectorXd pred = K * a;
 		VectorXd grad = lam * pred;
 		for (int j = 0; j < m; j++) {
-            for (int k = 0; k < m; k++) {
-				if (y(j) * pred(j) < 1) grad(k) -= y(j) * K(j, k);
-			}
+            if (y(j) * pred(j) < 1) grad -= y(j) * K.row(j);
 		}
 		a -= lr * grad;
     }
@@ -125,9 +119,7 @@ void KernelSVM::fit_with_kernel_matrix(const MatrixXd& X, const MatrixXd& K, con
         VectorXd pred = K * a;
 		VectorXd grad = lam * pred;
 		for (int j = 0; j < m; j++) {
-            for (int k = 0; k < m; k++) {
-				if (y(j) * pred(j) < 1) grad(k) -= y(j) * K(j, k);
-			}
+            if (y(j) * pred(j) < 1) grad -= y(j) * K.row(j);
 		}
 		a -= lr * grad;
         if (grad.norm() < tol) break;

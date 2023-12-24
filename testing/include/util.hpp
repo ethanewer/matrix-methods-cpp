@@ -169,7 +169,9 @@ double test_binary_preds(const VectorXd& preds, const VectorXd& y) {
 	double error_count = 0.0;
 	for (int k = 0; k < y.size(); k++) {
 		double pred = preds(k) < 0.5 ? 0 : 1;
-		if (pred != y(k)) error_count += 1;
+		if (pred != y(k)) {
+			error_count += 1;
+		}
 	}
 	return error_count / y.size();
 }

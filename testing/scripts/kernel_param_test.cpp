@@ -4,7 +4,6 @@
 
 int main() {
 	auto [X_train, X_test, y_train, y_test] = load_face_emotion_data();
-	
 
 	std::vector<double> sigs;
 	std::vector<double> lams;
@@ -22,7 +21,7 @@ int main() {
 
 	for (double lam : lams) {
 		for (double sig : sigs) {
-				mm::KernelRegressionL2 model1([sig](const VectorXd& u, const VectorXd& v) { 
+			mm::KernelRegressionL2 model1([sig](const VectorXd& u, const VectorXd& v) { 
 				return exp(-(u - v).squaredNorm() / (2 * sig * sig)); 
 			});
 			model1.fit(X_train, y_train, lam);

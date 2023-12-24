@@ -41,7 +41,7 @@ VectorXd SigmoidBinaryCrossentropy::backward(const VectorXd& y_true, double lr) 
 }
 
 VectorXd SoftmaxCategoricalCrossentropy::forward(const VectorXd& input) {
-	VectorXd exp_input = input.array().exp();\
+	VectorXd exp_input = input.array().exp();
 	return this->activation = exp_input / exp_input.sum();
 }
 
